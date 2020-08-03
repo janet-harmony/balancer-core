@@ -1,30 +1,33 @@
+require('dotenv').config()
+const {endpoint, chainID} = require(__dirname + "/config")
+const {ChainType} = require('@harmony-js/utils')
+const {TruffleProvider} = require('@harmony-js/core')
+
 module.exports = {
     networks: {
-        development: {
-            host: 'localhost', // Localhost (default: none)
-            port: 8545, // Standard Ethereum port (default: none)
-            network_id: '*', // Any network (default: none)
-            gas: 10000000,
-        },
-        coverage: {
-            host: 'localhost',
-            network_id: '*',
-            port: 8555,
-            gas: 0xfffffffffff,
-            gasPrice: 0x01,
-        },
+        network: {
+            network_id: "*",
+            // Relevant params are defined from env file & config
+            provider: new TruffleProvider(
+                endpoint,
+                // Harmony wallets/accounts are implicitly the 0-th account of the menmonic
+                // Harmony does NOT currently support n-th account from the menmonic
+                {menmonic: process.env.MNEMONIC, index: 0, addressCount: 1},
+                {shardID: parseInt(process.env.SHARD), chainId: chainID, chainType: ChainType.Harmony},
+                {gasLimit: process.env.GASLIMIT, gasPrice: process.env.GASPRICE}
+            )
+        }
     },
+
     // Configure your compilers
     compilers: {
+        // Recommended to stay (strictly) below solidity version 0.6.0 for Harmony
         solc: {
             version: '0.5.12',
-            settings: { // See the solidity docs for advice about optimization and evmVersion
-                optimizer: {
-                    enabled: true,
-                    runs: 100,
-                },
-                evmVersion: 'byzantium',
-            },
-        },
-    },
-};
+            optimizer: {
+                enabled: true,
+                runs: 200
+            }
+        }
+    }
+}

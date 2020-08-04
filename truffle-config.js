@@ -18,16 +18,16 @@ module.exports = {
             )
         }
     },
-
-    // Configure your compilers
     compilers: {
-        // Recommended to stay (strictly) below solidity version 0.6.0 for Harmony
         solc: {
             version: '0.5.12',
-            optimizer: {
-                enabled: true,
-                runs: 200
-            }
-        }
-    }
+            settings: { // See the solidity docs for advice about optimization and evmVersion
+                optimizer: {
+                    enabled: true,
+                    runs: 2000,
+                },
+                evmVersion: 'byzantium',
+            },
+        },
+    },
 }

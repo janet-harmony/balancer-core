@@ -11,9 +11,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity 0.5.12;
-
 // Test Token
+
+pragma solidity >=0.4.21 <0.6.0;
 
 contract TToken {
 

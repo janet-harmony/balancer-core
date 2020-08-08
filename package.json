@@ -35,7 +35,7 @@
         "solidity-coverage": "^0.6.7",
         "standard": "^14.0.2",
         "truffle-assertions": "^0.9.1",
-        "web3": "^1.2.0"
+        "web3": "^1.2.11"
     },
     "dependencies": {
         "@harmony-js/core": "^0.1.50",

